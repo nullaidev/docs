@@ -1,0 +1,26 @@
+---
+title: 'Installation'
+description: 'To get started with Vista, you need to have PHP 8.4 installed on your system.'
+icon: 'download'
+---
+
+You can install Vista via Composer. Run the following command in your terminal:
+
+```bash
+composer require nullaidev/vista
+```
+
+https://packagist.org/packages/nullaidev/vista
+
+## Entry Point
+
+Now, create a View and render it from your project main entry point, such as a typical `public/index.php`:
+
+```php
+require_once __DIR__ . '/../vendor/autoload.php';
+const NULLAI_VISTA_VIEWS_FOLDER = __DIR__ . '/views';
+
+echo new \Nullai\Vista\View('home');
+```
+
+For each page you can provide a new view.

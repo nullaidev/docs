@@ -1,0 +1,59 @@
+---
+title: 'Layout'
+description: 'Layouts provide the tooling needed to wrap a views output.'
+icon: 'table-layout'
+---
+
+First create a layout file as `views/layouts/main-layout.php`:
+
+```php
+<?php
+/**
+ * views/layouts/main-layout.php
+ *
+ * @var $this \Nullai\Vista\Engines\ViewRenderEngine
+ */
+?>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>My Site</title>
+        <?php $this->yield('scripts'); ?>
+    </head>
+
+    <body>
+        <?php $this->yield('main');  ?>
+
+        <?php $this->yield('footer'); ?>
+    </body>
+</html>
+```
+
+### Apply Layout
+
+Next, create a file that uses the layout `views/home.php`:
+
+```php
+<?php
+/**
+ * views/home.php
+ *
+ * @var $this \Nullai\Vista\Engines\ViewRenderEngine
+ * @var $content string
+ */
+$this->layout('layouts.main-layout');
+
+// Yielded by the layout's $this->yield('main')
+echo $content;
+?>
+
+<?php $this->section('scripts'); ?>
+<script>
+    console.log(<?= json_encode(['site' => '<My Site>'], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT) ?>);
+</script>
+<?php $this->end(); ?>
+
+<?php $this->section('footer'); ?>
+<footer>My footer</footer>
+<?php $this->end(); ?>
+```

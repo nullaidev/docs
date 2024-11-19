@@ -1,0 +1,49 @@
+---
+title: 'Sanitize'
+description: 'Sanitization of raw HTML, attributes, and JSON.'
+icon: 'radiation'
+---
+
+Sanitize HTML from using the rendering engine's `escHtml()` and `escAttr()`:
+
+```php
+<?php
+/**
+ * Sidebar view file
+ * @var array $menu The array of menu items passed to this view
+ * @var $this \Nullai\Vista\Engines\ViewRenderEngine
+ */
+?>
+<aside class="sidebar">
+    <nav class="menu">
+        <ul>
+            <?php foreach ($menu ?? [] as $item): ?>
+                <li>
+                    <a href="#" title="<?= $this->escAttr($item) ?>">
+                        <?= $this->escHtml($item) ?>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </nav>
+</aside>
+```
+
+Sanitize data and encode it as JSON using thw rendering engine's `escJson()`:
+
+```php
+<?php
+/**
+ * Sidebar view file
+ * @var array $menu The array of menu items passed to this view
+ * @var $this \Nullai\Vista\Engines\ViewRenderEngine
+ */
+?>
+
+<?php $this->section('scripts'); ?>
+<script>
+    // Safely embed JSON in a JavaScript variable
+    console.log(<?= $this->escJson(['site' => '<My Site>']) ?>);
+</script>
+<?php $this->end(); ?>
+```
