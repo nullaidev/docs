@@ -1,6 +1,7 @@
 {
   "$schema": "https://mintlify.com/schema.json",
   "name": "Nullai Documentation",
+  "versions": ["v1"],
   "logo": {
     "dark": "/logo/dark.svg",
     "light": "/logo/light.svg"
@@ -29,32 +30,34 @@
     {
       "name": "Vista",
       "icon": "table-layout",
-      "url": "vista"
+      "url": "v1/vista"
     },
     {
       "name": "Hygiene",
       "icon": "broom-wide",
-      "url": "hygiene"
+      "url": "v1/hygiene"
     }
   ],
   "navigation": [
     {
       "group": "Vista",
+      "version": "v1",
       "pages": [
-        "vista/overview",
-        "vista/install",
-        "vista/example",
-        "vista/layout",
-        "vista/includes"
+        "v1/vista/overview",
+        "v1/vista/install",
+        "v1/vista/example",
+        "v1/vista/layout",
+        "v1/vista/includes"
       ]
     },
     {
       "group": "Hygiene",
+      "version": "v1",
       "pages": [
-        "hygiene/overview",
-        "hygiene/install",
-        "hygiene/sanitize-html",
-        "hygiene/filter-html"
+        "v1/hygiene/overview",
+        "v1/hygiene/install",
+        "v1/hygiene/sanitize-html",
+        "v1/hygiene/filter-html"
       ]
     }
   ],
