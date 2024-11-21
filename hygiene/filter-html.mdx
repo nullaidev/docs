@@ -4,24 +4,64 @@ description: 'Whitelist and blacklist HTML tags.'
 icon: 'filter'
 ---
 
-Filter specific HTML tags and attributes with `\Nullai\Hygiene\SanitizeHtml::allowTags()`:
+The `\Nullai\Hygiene\SanitizeHtml::filterTags()` method is a powerful tool for sanitizing HTML content by allowing or blacklisting specific HTML tags and their attributes. This feature is particularly useful for ensuring secure and clean user-generated content.
+
+## Method Signature
 
 ```php
-<?php
-echo \Nullai\Hygiene\SanitizeHtml::allowTags(
-    html: '<p><a href="#" class="underline">Link</a><p>',
-    tags: 'a:href,class,p',
-    allow: true
-);
+\Nullai\Hygiene\SanitizeHtml::allowTags(string $html, string $tags, bool $allow): string
 ```
 
-Blacklist tags:
+- **`$html`** *(string)*: The HTML string to sanitize.
+- **`$tags`** *(string)*: A comma-separated list of tags and attributes to allow or blacklist.
+  - Attributes can be specified for a tag using `:`. For example, `a:href|class` allows the `href` and `class` attributes for `<a>` tags.
+  - Tags without attributes apply rules to the entire tag. For instance, `p` targets the `<p>` tag.
+- **`$allow`** *(bool)*: Specifies the mode of filtering.
+- `true`: Whitelist mode — allows only the specified tags and attributes.
+- `false`: Blacklist mode — removes the specified tags and attributes.
+
+## Examples
+
+### 1. Whitelisting Specific Tags and Attributes
+
+Allow only the `<p>` and `<a>` tags, preserving the `href` and `class` attributes for `<a>`. All other tags and attributes will be removed.
 
 ```php
 <?php
 echo \Nullai\Hygiene\SanitizeHtml::allowTags(
-    html: '<iframe><iframe><script><script>',
+    html: '<p><a href="#" class="underline">Link</a></p><div>Other Content</div>',
+    tags: 'a:href|class,p',
+    allow: true
+);
+
+// Output: <p><a href="#" class="underline">Link</a></p>
+```
+
+### 2. Blacklisting Specific Tags
+
+Remove `<iframe>` and `<script>` tags from the input HTML while leaving other tags intact.
+
+```php
+<?php
+echo \Nullai\Hygiene\SanitizeHtml::allowTags(
+    html: '<iframe><iframe><script>alert(true)<script><p>Safe Content</p>',
     tags: 'iframe,script',
     allow: false
 );
+
+// Output: <p>Safe Content</p>
 ```
+
+## Common Use Cases
+
+- **Content Management Systems (CMS)**: Allow safe tags (e.g., `<p>`, `<strong>`) for user-submitted content.
+- **Preventing Cross-Site Scripting (XSS)**: Blacklist potentially dangerous tags such as `<script>` or `<iframe>`.
+- **Custom HTML Filtering**: Enforce specific rules for HTML output tailored to your requirements.
+
+## Best Practices
+
+1. **Use Whitelisting**: Prioritize whitelisting tags and attributes to ensure security by default.
+2. **Minimize Attributes**: Allow only the essential attributes for each tag to reduce risks.
+3. **Test Thoroughly**: Regularly test the output for edge cases and unusual input to ensure the desired behavior.
+
+With `\Nullai\Hygiene\SanitizeHtml::allowTags()`, you can easily implement secure and customizable HTML sanitization in your applications.
