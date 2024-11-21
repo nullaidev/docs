@@ -1,0 +1,33 @@
+---
+title: 'Sanitize HTML'
+description: 'Sanitization of raw HTML, attributes, and JSON.'
+icon: 'broom-wide'
+---
+
+Sanitize HTML from using `\Nullai\Hygiene\SanitizeHtml::escHtml()` and `\Nullai\Hygiene\SanitizeHtml::escAttr()`:
+
+```php
+<aside class="sidebar">
+    <nav class="menu">
+        <ul>
+            <li>
+                <a href="#" title="<?= \Nullai\Hygiene\SanitizeHtml::escAttr($linkTitle) ?>">
+                    <?= \Nullai\Hygiene\SanitizeHtml::escHtml($linkTitle) ?>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</aside>
+```
+
+## Sanitize JSON
+
+Sanitize data and encode it as JSON using `\Nullai\Hygiene\SanitizeHtml::escJson()`:
+
+```php
+<?php
+<script>
+    // Safely embed JSON in a JavaScript variable
+    console.log(<?= \Nullai\Hygiene\SanitizeHtml::escJson(['site' => '<My Site>']) ?>);
+</script>
+```

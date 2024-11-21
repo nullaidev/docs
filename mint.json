@@ -40,8 +40,16 @@
         "vista/install",
         "vista/example",
         "vista/layout",
-        "vista/sanitize",
         "vista/includes"
+      ]
+    },
+    {
+      "group": "Hygiene",
+      "pages": [
+        "hygiene/overview",
+        "hygiene/install",
+        "hygiene/sanitize-html",
+        "hygiene/filter-html"
       ]
     }
   ],
