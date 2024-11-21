@@ -27,9 +27,14 @@
   },
   "anchors": [
     {
-      "name": "Github",
-      "icon": "github",
-      "url": "https://github.com/nullaidev"
+      "name": "Vista",
+      "icon": "table-layout",
+      "url": "vista"
+    },
+    {
+      "name": "Hygiene",
+      "icon": "broom-wide",
+      "url": "hygiene"
     }
   ],
   "navigation": [

@@ -29,7 +29,7 @@ Allow only the `<p>` and `<a>` tags, preserving the `href` and `class` attribute
 ```php
 <?php
 echo \Nullai\Hygiene\SanitizeHtml::allowTags(
-    html: '<p><a href="#" class="underline">Link</a></p><div>Other Content</div>',
+    html: '<p class="bold"><a href="#" class="underline">Link</a></p><div>Other Content</div>',
     tags: 'a:href|class,p',
     allow: true
 );

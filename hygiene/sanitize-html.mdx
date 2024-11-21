@@ -4,7 +4,11 @@ description: 'Sanitization of raw HTML, attributes, and JSON.'
 icon: 'broom-wide'
 ---
 
-Sanitize HTML from using `\Nullai\Hygiene\SanitizeHtml::escHtml()` and `\Nullai\Hygiene\SanitizeHtml::escAttr()`:
+The `\Nullai\Hygiene\SanitizeHtml` class offers methods for safely sanitizing HTML, attributes, and JSON data. These tools ensure that your application is protected against common injection vulnerabilities and XSS attacks.
+
+## Sanitizing HTML Content
+
+The `\Nullai\Hygiene\SanitizeHtml::escHtml()` method escapes special characters in a string to ensure it is safe for rendering in an HTML context.
 
 ```php
 <aside class="sidebar">
@@ -20,14 +24,57 @@ Sanitize HTML from using `\Nullai\Hygiene\SanitizeHtml::escHtml()` and `\Nullai\
 </aside>
 ```
 
-## Sanitize JSON
+### Explanation:
 
-Sanitize data and encode it as JSON using `\Nullai\Hygiene\SanitizeHtml::escJson()`:
+- **`escHtml(string $html): string`**
+  - Escapes HTML special characters like `<`, `>`, and `&`, converting them into their respective HTML entities.
+  - Output is safe to use within HTML tags or content.
+
+- **`escAttr(string $attribute): string`**
+  - Escapes special characters like `<`, `>`, `"`, `'`, and `&`, to ensure it is safe for use in HTML attributes.
+  - Prevents injection vulnerabilities within attribute values.
+
+## Sanitizing JSON Data
+
+The `\Nullai\Hygiene\SanitizeHtml::escJson()` method sanitizes data and safely encodes it as JSON for embedding in JavaScript.
 
 ```php
-<?php
 <script>
     // Safely embed JSON in a JavaScript variable
     console.log(<?= \Nullai\Hygiene\SanitizeHtml::escJson(['site' => '<My Site>']) ?>);
 </script>
 ```
+
+### Explanation:
+
+- **`escJson(mixed $data): string`**
+  - Encodes PHP data as a JSON string with escaping to ensure it is safe for embedding directly into JavaScript.
+  - Ensures safe JSON encoding by escaping special characters such as `<`, `>`, `&`, `'`, and `"` using hexadecimal escape sequences, preventing JavaScript injection vulnerabilities.
+
+The `escJson()` method uses `json_encode()` with the following flags: `JSON_HEX_TAG`, `JSON_HEX_APOS`, `JSON_HEX_AMP`, and `JSON_HEX_QUOT`:
+
+- `<` as `\u003C`
+- `>` as `\u003E`
+- `&` as `\u0026`
+- `'` as `\u0027`
+- `"` as `\u0022`
+
+This hexadecimal escaping makes the encoded JSON safe for embedding directly into JavaScript, effectively preventing JavaScript injection attacks.
+
+## Common Use Cases
+
+### HTML and Attributes:
+- Escaping dynamic content displayed in HTML tags.
+- Escaping data used in HTML attributes to prevent malicious injections.
+
+### JSON:
+- Embedding server-side data into client-side JavaScript securely.
+- Generating JSON output that avoids breaking JavaScript execution due to unsafe characters.
+
+## Best Practices
+
+1. **Always Sanitize Input**: Use `escHtml()` and `escAttr()` to ensure dynamic content is safely rendered in HTML.
+2. **Use Escaped JSON for JavaScript**: Always sanitize and encode PHP data as JSON using `escJson()` before embedding in JavaScript.
+3. **Validate Before Sanitizing**: Ensure input data conforms to expected formats before applying sanitization.
+
+These methods from `\Nullai\Hygiene\SanitizeHtml` help ensure your application maintains robust defenses against XSS and injection vulnerabilities while simplifying safe handling of dynamic content.
