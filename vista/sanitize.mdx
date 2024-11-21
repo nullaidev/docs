@@ -1,10 +1,10 @@
 ---
 title: 'Sanitize'
-description: 'Sanitization of raw HTML, attributes, and JSON.'
+description: 'Sanitization of raw HTML, attributes, and JSON. Whitelist or blacklist HTML tags.'
 icon: 'radiation'
 ---
 
-Sanitize HTML from using the rendering engine's `escHtml()` and `escAttr()`:
+Sanitize HTML from using `\Nullai\Vista\SanitizeHtml::escHtml()` and `\Nullai\Vista\SanitizeHtml::escAttr()`:
 
 ```php
 <?php
@@ -19,8 +19,8 @@ Sanitize HTML from using the rendering engine's `escHtml()` and `escAttr()`:
         <ul>
             <?php foreach ($menu ?? [] as $item): ?>
                 <li>
-                    <a href="#" title="<?= $this->escAttr($item) ?>">
-                        <?= $this->escHtml($item) ?>
+                    <a href="#" title="<?= \Nullai\Vista\SanitizeHtml::escAttr($item) ?>">
+                        <?= \Nullai\Vista\SanitizeHtml::escHtml($item) ?>
                     </a>
                 </li>
             <?php endforeach; ?>
@@ -29,7 +29,9 @@ Sanitize HTML from using the rendering engine's `escHtml()` and `escAttr()`:
 </aside>
 ```
 
-Sanitize data and encode it as JSON using the rendering engine's `escJson()`:
+## Sanitize JSON
+
+Sanitize data and encode it as JSON using `\Nullai\Vista\SanitizeHtml::escJson()`:
 
 ```php
 <?php
@@ -43,7 +45,31 @@ Sanitize data and encode it as JSON using the rendering engine's `escJson()`:
 <?php $this->section('scripts'); ?>
 <script>
     // Safely embed JSON in a JavaScript variable
-    console.log(<?= $this->escJson(['site' => '<My Site>']) ?>);
+    console.log(<?= \Nullai\Vista\SanitizeHtml::escJson(['site' => '<My Site>']) ?>);
 </script>
 <?php $this->end(); ?>
+```
+
+## Whitelist & Blacklist HTML Tags
+
+Sanitize and allow specific HTML tags and attributes with `\Nullai\Vista\SanitizeHtml::allowTags()`:
+
+```php
+<?php
+echo \Nullai\Vista\SanitizeHtml::allowTags(
+    html: '<p><a href="#" class="underline">Link</a><p>',
+    tags: 'a:href,class,p',
+    allow: true
+);
+```
+
+Blacklist tags:
+
+```php
+<?php
+echo \Nullai\Vista\SanitizeHtml::allowTags(
+    html: '<iframe><iframe><script><script>',
+    tags: 'iframe,script',
+    allow: false
+);
 ```
