@@ -29,12 +29,12 @@
   "anchors": [
     {
       "name": "Vista",
-      "icon": "table-layout",
+      "icon": "mountains",
       "url": "v1/vista"
     },
     {
       "name": "Hygiene",
-      "icon": "broom-wide",
+      "icon": "sparkles",
       "url": "v1/hygiene"
     }
   ],

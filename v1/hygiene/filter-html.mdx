@@ -10,7 +10,7 @@ The `\Nullai\Hygiene\SanitizeHtml::filterTags()` method is a powerful tool for s
 ## Method Signature
 
 ```php
-\Nullai\Hygiene\SanitizeHtml::allowTags(string $html, string $tags, bool $allow): string
+\Nullai\Hygiene\SanitizeHtml::filterTags(string $html, string $tags, bool $allow): string
 ```
 
 - **`$html`** *(string)*: The HTML string to sanitize.
@@ -29,7 +29,7 @@ Allow only the `<p>` and `<a>` tags, preserving the `href` and `class` attribute
 
 ```php
 <?php
-echo \Nullai\Hygiene\SanitizeHtml::allowTags(
+echo \Nullai\Hygiene\SanitizeHtml::filterTags(
     html: '<p class="bold"><a href="#" class="underline">Link</a></p><div>Other Content</div>',
     tags: 'a:href|class,p',
     allow: true
@@ -44,7 +44,7 @@ Remove `<iframe>` and `<script>` tags from the input HTML while leaving other ta
 
 ```php
 <?php
-echo \Nullai\Hygiene\SanitizeHtml::allowTags(
+echo \Nullai\Hygiene\SanitizeHtml::filterTags(
     html: '<iframe><iframe><script>alert(true)<script><p>Safe Content</p>',
     tags: 'iframe,script',
     allow: false
@@ -65,4 +65,4 @@ echo \Nullai\Hygiene\SanitizeHtml::allowTags(
 2. **Minimize Attributes**: Allow only the essential attributes for each tag to reduce risks.
 3. **Test Thoroughly**: Regularly test the output for edge cases and unusual input to ensure the desired behavior.
 
-With `\Nullai\Hygiene\SanitizeHtml::allowTags()`, you can easily implement secure and customizable HTML sanitization in your applications.
+With `\Nullai\Hygiene\SanitizeHtml::filterTags()`, you can easily implement secure and customizable HTML sanitization in your applications.
