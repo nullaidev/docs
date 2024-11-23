@@ -25,15 +25,26 @@ The `\Nullai\Hygiene\SanitizeHtml::escHtml()` method escapes special characters 
 </aside>
 ```
 
-### Explanation:
+### Method Signatures
 
-- **`escHtml(string $html): string`**
-  - Escapes HTML special characters like `<`, `>`, and `&`, converting them into their respective HTML entities.
-  - Output is safe to use within HTML tags or content.
+```php
+\Nullai\Hygiene\SanitizeHtml::escHtml(string $html): string
+```
 
-- **`escAttr(string $attribute): string`**
-  - Escapes special characters like `<`, `>`, `"`, `'`, and `&`, to ensure it is safe for use in HTML attributes.
-  - Prevents injection vulnerabilities within attribute values.
+<ParamField path="$html" type="string">
+  Escapes HTML special characters like `<`, `>`, and `&`, converting them into their respective HTML entities.
+  Output is safe to use within HTML tags or content.
+</ParamField>
+
+```php
+\Nullai\Hygiene\SanitizeHtml::escAttr(string $attribute): string
+```
+
+<ParamField path="$attribute" type="string">
+  Escapes special characters like `<`, `>`, `"`, `'`, and `&`, to ensure it is safe for use in HTML attributes.
+  Prevents injection vulnerabilities within attribute values.
+</ParamField>
+
 
 ## Sanitizing JSON Data
 
@@ -46,11 +57,18 @@ The `\Nullai\Hygiene\SanitizeHtml::escJson()` method sanitizes data and safely e
 </script>
 ```
 
-### Explanation:
+### Method Signature
 
-- **`escJson(mixed $data): string`**
+```php
+\Nullai\Hygiene\SanitizeHtml::escJson(mixed $data): string
+```
+
+<ParamField path="$data" type="mixed">
   - Encodes PHP data as a JSON string with escaping to ensure it is safe for embedding directly into JavaScript.
   - Ensures safe JSON encoding by escaping special characters such as `<`, `>`, `&`, `'`, and `"` using hexadecimal escape sequences, preventing JavaScript injection vulnerabilities.
+</ParamField>
+
+### Explanation
 
 The `escJson()` method uses `json_encode()` with the following flags: `JSON_HEX_TAG`, `JSON_HEX_APOS`, `JSON_HEX_AMP`, and `JSON_HEX_QUOT`:
 
@@ -64,11 +82,11 @@ This hexadecimal escaping makes the encoded JSON safe for embedding directly int
 
 ## Common Use Cases
 
-### HTML and Attributes:
+### HTML and Attributes
 - Escaping dynamic content displayed in HTML tags.
 - Escaping data used in HTML attributes to prevent malicious injections.
 
-### JSON:
+### JSON
 - Embedding server-side data into client-side JavaScript securely.
 - Generating JSON output that avoids breaking JavaScript execution due to unsafe characters.
 

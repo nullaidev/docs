@@ -5,14 +5,28 @@ icon: 'eye'
 version: 'v1'
 ---
 
-Hygiene is only a few files and very capable:
-
-- **Sanitize**: Sanitize raw HTML, Attributes, and JSON.
-- **HTML Filter**: Filter HTML with a whitelist or blacklist.
+Hygiene is a lightweight and efficient PHP HTML sanitizer designed for modern PHP 8.4+ applications, providing robust protection against security risks like XSS attacks. It sanitizes raw HTML, attributes, and JSON data, offering flexible whitelisting and blacklisting to control content safety.
 
 <Card title="GitHub Repo" icon="github" href="https://github.com/nullaidev/hygiene">
   Keep your HTML clean with Hygiene.
 </Card>
+
+## Key Features
+
+<CardGroup cols={2}>
+  <Card title="Sanitize Raw HTML" icon="code">
+    Clean raw HTML content to remove harmful elements, preventing security issues like XSS attacks and ensuring safe content rendering.
+  </Card>
+  <Card title="Sanitize Attributes" icon="brackets-square">
+    Sanitize attributes like <code>src</code> and <code>href</code> to ensure only safe, valid values are included, blocking malicious content.
+  </Card>
+  <Card title="Sanitize JSON" icon="brackets-curly">
+    Remove potentially harmful or malformed characters from JSON data, ensuring it's safe for parsing and prevents injection risks.
+  </Card>
+  <Card title="HTML Filter (Whitelist & Blacklist)" icon="filter">
+    Filter HTML using a whitelist to allow only specific tags or a blacklist to remove unwanted elements, giving you full control over the content.
+  </Card>
+</CardGroup>
 
 ## Security Vulnerabilities
 

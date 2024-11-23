@@ -13,13 +13,21 @@ The `\Nullai\Hygiene\SanitizeHtml::filterTags()` method is a powerful tool for s
 \Nullai\Hygiene\SanitizeHtml::filterTags(string $html, string $tags, bool $allow): string
 ```
 
-- **`$html`** *(string)*: The HTML string to sanitize.
-- **`$tags`** *(string)*: A comma-separated list of tags and attributes to allow or blacklist.
+<ParamField path="$html" type="string">
+  The HTML string to sanitize.
+</ParamField>
+
+<ParamField path="$tags" type="string">
+  A comma-separated list of tags and attributes to allow or blacklist.
   - Attributes can be specified for a tag using `:`. For example, `a:href|class` allows the `href` and `class` attributes for `<a>` tags.
   - Tags without attributes apply rules to the entire tag. For instance, `p` targets the `<p>` tag.
-- **`$allow`** *(bool)*: Specifies the mode of filtering.
-- `true`: Whitelist mode — allows only the specified tags and attributes.
-- `false`: Blacklist mode — removes the specified tags and attributes.
+</ParamField>
+
+<ParamField path="$allow" type="boolean">
+  Specifies the mode of filtering.
+  - `true`: Whitelist mode — allows only the specified tags and attributes.
+  - `false`: Blacklist mode — removes the specified tags and attributes.
+</ParamField>
 
 ## Examples
 
